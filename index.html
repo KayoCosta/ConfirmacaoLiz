@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1º Aninho da Liz</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(180deg, #fdfbf8 0%, #ecf8ed 100%);
+      color: #2e4223;
+      text-align: center;
+    }
+
+    header {
+      padding: 40px 20px 10px;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      color: #3b5d33;
+      margin-bottom: 5px;
+    }
+
+    h2 {
+      font-weight: normal;
+      color: #4e6a44;
+      margin-top: 5px;
+      font-size: 1.2em;
+    }
+
+    .info {
+      background: #ffffffd9;
+      border-radius: 16px;
+      display: inline-block;
+      padding: 20px 30px;
+      margin: 20px auto;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+
+    .info p {
+      margin: 8px 0;
+      font-size: 1.05em;
+    }
+
+    .countdown {
+      font-size: 1.3em;
+      margin: 20px 0;
+      color: #b14c4c;
+      font-weight: 600;
+    }
+
+    .form-area {
+      background: #ffffffcc;
+      border-radius: 16px;
+      display: inline-block;
+      padding: 25px 30px;
+      margin: 10px auto 30px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    input[type="text"], select {
+      padding: 10px 14px;
+      font-size: 1em;
+      border: 1.8px solid #9cc89a;
+      border-radius: 10px;
+      width: 250px;
+      outline: none;
+      text-align: center;
+      margin: 5px;
+      transition: 0.3s;
+    }
+
+    input[type="text"]:focus, select:focus {
+      border-color: #6fa96b;
+      box-shadow: 0 0 4px rgba(111,169,107,0.4);
+    }
+
+    label {
+      font-size: 1em;
+      display: block;
+      margin-top: 10px;
+      color: #3e5b33;
+    }
+
+    .btn-confirmar {
+      display: inline-block;
+      background-color: #cfe8d1;
+      color: #2f3b2b;
+      text-decoration: none;
+      padding: 12px 30px;
+      border-radius: 30px;
+      font-size: 1em;
+      font-weight: 600;
+      border: none;
+      transition: 0.3s ease;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    .btn-confirmar:hover {
+      background-color: #b7dcb8;
+      transform: translateY(-2px);
+    }
+
+    footer {
+      margin-top: 40px;
+      padding-bottom: 30px;
+      color: #5b7050;
+      font-size: 0.9em;
+    }
+
+    .companheiro {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>1º Aninho da Liz</h1>
+    <h2>Vamos almoçar juntos e celebrar a vida da Liz</h2>
+  </header>
+
+  <div class="info">
+    <p><strong>📅 Data:</strong> 14 de dezembro de 2025</p>
+    <p><strong>🕐 Horário:</strong> 13h</p>
+    <p><strong>📍 Local:</strong> R. Des. Eurípdes Queiroz do Valle, 285 - Jardim Camburi, Vitória - ES<br>Edifício Camburi Design</p>
+  </div>
+
+  <div class="countdown" id="countdown">Carregando contador...</div>
+
+  <div class="form-area">
+    <label for="nome">Seu nome:</label>
+    <input type="text" id="nome" placeholder="Digite seu nome">
+
+    <label for="quantidade">Quantas pessoas vão?</label>
+    <select id="quantidade">
+      <option value="1" selected>1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+    </select>
+
+    <div id="companheiros"></div>
+
+    <button id="btnConfirmar" class="btn-confirmar">Confirmar presença</button>
+  </div>
+
+  <footer>
+    <p>Com carinho, família da Liz</p>
+  </footer>
+
+  <script>
+    // contador regressivo
+    const countdown = document.getElementById('countdown');
+    const eventDate = new Date('2025-12-14T13:00:00').getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const diff = eventDate - now;
+
+      if (diff <= 0) {
+        countdown.innerHTML = "É hoje! Estamos te esperando!";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      countdown.innerHTML = `Faltam ${days} dias, ${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    setInterval(updateCountdown, 1000);
+
+    // campos de acompanhantes
+    const quantidadeSelect = document.getElementById('quantidade');
+    const companheirosDiv = document.getElementById('companheiros');
+
+    quantidadeSelect.addEventListener('change', () => {
+      const qtd = parseInt(quantidadeSelect.value);
+      companheirosDiv.innerHTML = '';
+      for (let i = 2; i <= qtd; i++) {
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.placeholder = `Nome do acompanhante ${i - 1}`;
+        input.style.display = 'block';
+        input.style.margin = '8px auto';
+        companheirosDiv.appendChild(input);
+      }
+    });
+
+    // botão WhatsApp
+    const btn = document.getElementById('btnConfirmar');
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      const nome = document.getElementById('nome').value.trim();
+      const qtd = parseInt(quantidadeSelect.value);
+      const companheiros = [...companheirosDiv.querySelectorAll('input')]
+        .map(c => c.value.trim())
+        .filter(c => c !== '');
+
+      if (!nome) {
+        alert('Por favor, digite seu nome antes de confirmar.');
+        return;
+      }
+
+      let mensagem = `Oi! Aqui é ${nome}. Quero confirmar presença no aniversário da Liz.`;
+      if (qtd > 1) {
+        mensagem += ` Estaremos em ${qtd} pessoas: ${nome}`;
+        if (companheiros.length > 0) {
+          mensagem += `, ${companheiros.join(', ')}`;
+        }
+        mensagem += '.';
+      }
+
+      const url = `https://wa.me/5527996165710?text=${encodeURIComponent(mensagem)}`;
+      window.open(url, '_blank');
+    });
+  </script>
+</body>
+</html>
