@@ -3,23 +3,43 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>1º Aninho da Liz</title>
+  <title>Confirme sua presença!</title> 
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    body {
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
       font-family: 'Quicksand', sans-serif;
-      background: linear-gradient(180deg, #fdfbf8 0%, #ecf8ed 100%);
-      color: #2e4223;
+      background: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 380px;
+      height: 720px;
+      background: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: 20px;
+    }
+
+    .content {
+      flex: 1;
       text-align: center;
     }
 
-    header {
-      padding: 40px 20px 10px;
-    }
-
     h1 {
-      font-size: 2.5em;
+      font-size: 1.8em;
       color: #3b5d33;
       margin-bottom: 5px;
     }
@@ -27,49 +47,47 @@
     h2 {
       font-weight: normal;
       color: #4e6a44;
-      margin-top: 5px;
-      font-size: 1.2em;
+      margin-bottom: 15px;
+      font-size: 1em;
     }
 
     .info {
-      background: #ffffffd9;
+      background: rgba(255,255,255,0.85);
       border-radius: 16px;
-      display: inline-block;
-      padding: 20px 30px;
-      margin: 20px auto;
+      padding: 20px;
+      margin-bottom: 15px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      font-size: 0.95em;
     }
 
     .info p {
-      margin: 8px 0;
-      font-size: 1.05em;
+      margin: 6px 0;
     }
 
     .countdown {
-      font-size: 1.3em;
-      margin: 20px 0;
+      font-size: 1.1em;
+      margin: 15px 0;
       color: #b14c4c;
       font-weight: 600;
     }
 
     .form-area {
-      background: #ffffffcc;
+      background: rgba(255,255,255,0.85);
       border-radius: 16px;
-      display: inline-block;
-      padding: 25px 30px;
-      margin: 10px auto 30px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      margin-bottom: 15px;
     }
 
     input[type="text"], select {
-      padding: 10px 14px;
+      padding: 10px 12px;
       font-size: 1em;
-      border: 1.8px solid #9cc89a;
+      border: 1.5px solid #9cc89a;
       border-radius: 10px;
-      width: 250px;
+      width: 100%;
+      margin: 8px 0;
       outline: none;
       text-align: center;
-      margin: 5px;
       transition: 0.3s;
     }
 
@@ -79,25 +97,26 @@
     }
 
     label {
-      font-size: 1em;
+      font-size: 0.95em;
       display: block;
       margin-top: 10px;
       color: #3e5b33;
     }
 
     .btn-confirmar {
-      display: inline-block;
+      display: block;
       background-color: #cfe8d1;
       color: #2f3b2b;
       text-decoration: none;
-      padding: 12px 30px;
+      padding: 12px 0;
       border-radius: 30px;
       font-size: 1em;
       font-weight: 600;
       border: none;
       transition: 0.3s ease;
       cursor: pointer;
-      margin-top: 15px;
+      width: 100%;
+      margin-top: 10px;
     }
 
     .btn-confirmar:hover {
@@ -106,55 +125,54 @@
     }
 
     footer {
-      margin-top: 40px;
-      padding-bottom: 30px;
+      text-align: center;
+      padding: 10px 0;
+      font-size: 0.85em;
       color: #5b7050;
-      font-size: 0.9em;
-    }
-
-    .companheiro {
-      display: none;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>1º Aninho da Liz</h1>
-    <h2>Vamos almoçar juntos e celebrar a vida da Liz</h2>
-  </header>
+  <div class="container">
+    <div class="content">
+      <header>
+        <h1>1º Aninho da Liz</h1>
+        <h2>Vamos almoçar juntos e celebrar a vida da Liz</h2>
+      </header>
 
-  <div class="info">
-    <p><strong>📅 Data:</strong> 14 de dezembro de 2025</p>
-    <p><strong>🕐 Horário:</strong> 13h</p>
-    <p><strong>📍 Local:</strong> R. Des. Eurípdes Queiroz do Valle, 285 - Jardim Camburi, Vitória - ES<br>Edifício Camburi Design</p>
+      <div class="info">
+        <p><strong>📅 Data:</strong> 14 de dezembro de 2025</p>
+        <p><strong>🕐 Horário:</strong> 13h</p>
+        <p><strong>📍 Local:</strong> R. Des. Eurípdes Queiroz do Valle, 285 - Jardim Camburi, Vitória - ES<br>Edifício Camburi Design</p>
+      </div>
+
+      <div class="countdown" id="countdown">Carregando contador...</div>
+
+      <div class="form-area">
+        <label for="nome">Seu nome:</label>
+        <input type="text" id="nome" placeholder="Digite seu nome">
+
+        <label for="quantidade">Quantas pessoas vão?</label>
+        <select id="quantidade">
+          <option value="1" selected>1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+
+        <div id="companheiros"></div>
+
+        <button id="btnConfirmar" class="btn-confirmar">Confirmar presença</button>
+      </div>
+
+      <footer>
+        Com carinho, família da Liz
+      </footer>
+    </div>
   </div>
-
-  <div class="countdown" id="countdown">Carregando contador...</div>
-
-  <div class="form-area">
-    <label for="nome">Seu nome:</label>
-    <input type="text" id="nome" placeholder="Digite seu nome">
-
-    <label for="quantidade">Quantas pessoas vão?</label>
-    <select id="quantidade">
-      <option value="1" selected>1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-    </select>
-
-    <div id="companheiros"></div>
-
-    <button id="btnConfirmar" class="btn-confirmar">Confirmar presença</button>
-  </div>
-
-  <footer>
-    <p>Com carinho, família da Liz</p>
-  </footer>
 
   <script>
-    // contador regressivo
     const countdown = document.getElementById('countdown');
     const eventDate = new Date('2025-12-14T13:00:00').getTime();
 
@@ -177,7 +195,6 @@
 
     setInterval(updateCountdown, 1000);
 
-    // campos de acompanhantes
     const quantidadeSelect = document.getElementById('quantidade');
     const companheirosDiv = document.getElementById('companheiros');
 
@@ -189,12 +206,11 @@
         input.type = 'text';
         input.placeholder = `Nome do acompanhante ${i - 1}`;
         input.style.display = 'block';
-        input.style.margin = '8px auto';
+        input.style.margin = '8px 0';
         companheirosDiv.appendChild(input);
       }
     });
 
-    // botão WhatsApp
     const btn = document.getElementById('btnConfirmar');
     btn.addEventListener('click', function(e) {
       e.preventDefault();
